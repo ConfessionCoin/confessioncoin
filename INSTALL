@@ -1,0 +1,9 @@
+Building ConfessionCoin
+
+See doc/readme-qt.rst for instructions on building confessioncoin-Qt,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Confessioncoin.
+
+See doc/build-*.txt for instructions on building confessioncoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of ConfessionCoin.
