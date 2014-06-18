@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.7.0
+!define VERSION 0.8.7.1
 !define COMPANY "ConfessionCoin project"
 !define URL http://confessioncoin.com/
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile confessioncoin-0.8.7.0-win32-setup.exe
+OutFile confessioncoin-0.8.7.1-win32-setup.exe
 InstallDir $PROGRAMFILES\ConfessionCoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.7.0
+VIProductVersion 0.8.7.1
 VIAddVersionKey ProductName ConfessionCoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

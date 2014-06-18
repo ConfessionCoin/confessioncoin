@@ -1,9 +1,9 @@
 TEMPLATE = app
 TARGET = confessioncoin-qt
 macx:TARGET = "Confessioncoin-Qt"
-VERSION = 8.7.0
+VERSION = 8.7.1
 INCLUDEPATH += src src/json src/qt
-QT += core gui network
+QT += core gui network webkit
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 win32:DEFINES +=  HAVE_CXX_STDHEADERS _MT WIN32 _WINDOWS
@@ -202,6 +202,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/walletframe.h \
     src/bitcoinrpc.h \
     src/qt/overviewpage.h \
+    src/qt/confessionalpage.h \
     src/qt/csvmodelwriter.h \
     src/crypter.h \
     src/qt/sendcoinsentry.h \
@@ -280,6 +281,7 @@ SOURCES += src/qt/bitcoin.cpp \
     src/rpcblockchain.cpp \
     src/rpcrawtransaction.cpp \
     src/qt/overviewpage.cpp \
+    src/qt/confessionalpage.cpp \
     src/qt/csvmodelwriter.cpp \
     src/crypter.cpp \
     src/qt/sendcoinsentry.cpp \
@@ -307,6 +309,7 @@ FORMS += src/qt/forms/sendcoinsdialog.ui \
     src/qt/forms/editaddressdialog.ui \
     src/qt/forms/transactiondescdialog.ui \
     src/qt/forms/overviewpage.ui \
+    src/qt/forms/confessionalpage.ui \
     src/qt/forms/sendcoinsentry.ui \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \

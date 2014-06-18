@@ -95,6 +95,8 @@ public:
     // Wallet backup
     bool backupWallet(const QString &filename);
 
+    std::string getNewWalletAddress();
+
     // RAI object for unlocking wallet, returned by requestUnlock()
     class UnlockContext
     {

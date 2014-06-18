@@ -173,6 +173,13 @@ void BitcoinGUI::createActions()
     overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
     tabGroup->addAction(overviewAction);
 
+    confessionalAction = new QAction(QIcon(":/icons/confessional"), tr("&Confessional"), this);
+    confessionalAction->setStatusTip(tr("Show the confessional"));
+    confessionalAction->setToolTip(confessionalAction->statusTip());
+    confessionalAction->setCheckable(true);
+    confessionalAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
+    tabGroup->addAction(confessionalAction);
+
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send"), this);
     sendCoinsAction->setStatusTip(tr("Send coins to a Confessioncoin address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
@@ -203,6 +210,8 @@ void BitcoinGUI::createActions()
 
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
+    connect(confessionalAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(confessionalAction, SIGNAL(triggered()), this, SLOT(gotoConfessionalPage()));
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -291,6 +300,7 @@ void BitcoinGUI::createToolBars()
     QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar->addAction(overviewAction);
+    toolbar->addAction(confessionalAction);
     toolbar->addAction(sendCoinsAction);
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
@@ -362,6 +372,7 @@ void BitcoinGUI::removeAllWallets()
 void BitcoinGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
+    confessionalAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     historyAction->setEnabled(enabled);
@@ -475,6 +486,11 @@ void BitcoinGUI::aboutClicked()
 void BitcoinGUI::gotoOverviewPage()
 {
     if (walletFrame) walletFrame->gotoOverviewPage();
+}
+
+void BitcoinGUI::gotoConfessionalPage()
+{
+    if (walletFrame) walletFrame->gotoConfessionalPage();
 }
 
 void BitcoinGUI::gotoHistoryPage()

@@ -15,6 +15,7 @@
 #include "optionsmodel.h"
 #include "transactionview.h"
 #include "overviewpage.h"
+#include "confessionalpage.h"
 #include "askpassphrasedialog.h"
 #include "ui_interface.h"
 
@@ -37,6 +38,7 @@ WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
 {
     // Create tabs
     overviewPage = new OverviewPage();
+    confessionalPage = new ConfessionalPage();
 
     transactionsPage = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout();
@@ -62,6 +64,7 @@ WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
     signVerifyMessageDialog = new SignVerifyMessageDialog(gui);
 
     addWidget(overviewPage);
+    addWidget(confessionalPage);
     addWidget(transactionsPage);
     addWidget(addressBookPage);
     addWidget(receiveCoinsPage);
@@ -117,6 +120,7 @@ void WalletView::setWalletModel(WalletModel *walletModel)
         // Put transaction list in tabs
         transactionView->setModel(walletModel);
         overviewPage->setWalletModel(walletModel);
+        confessionalPage->setWalletModel(walletModel);
         addressBookPage->setModel(walletModel->getAddressTableModel());
         receiveCoinsPage->setModel(walletModel->getAddressTableModel());
         sendCoinsPage->setModel(walletModel);
@@ -154,6 +158,12 @@ void WalletView::gotoOverviewPage()
 {
     gui->getOverviewAction()->setChecked(true);
     setCurrentWidget(overviewPage);
+}
+
+void WalletView::gotoConfessionalPage()
+{
+    gui->getConfessionalAction()->setChecked(true);
+    setCurrentWidget(confessionalPage);
 }
 
 void WalletView::gotoHistoryPage()

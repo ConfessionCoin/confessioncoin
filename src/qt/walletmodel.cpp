@@ -316,6 +316,25 @@ bool WalletModel::backupWallet(const QString &filename)
     return BackupWallet(*wallet, filename.toLocal8Bit().data());
 }
 
+std::string WalletModel::getNewWalletAddress()
+{
+    std::string strAddress = "";
+    // Generate a new address to associate with given label
+    WalletModel::UnlockContext ctx(requestUnlock());
+    if(!ctx.isValid())
+    {
+        // Unlock wallet failed or was cancelled
+        return strAddress;
+    }
+    CPubKey newKey;
+    if(!wallet->GetKeyFromPool(newKey, true))
+    {
+        return strAddress;
+    }
+    strAddress = CBitcoinAddress(newKey.GetID()).ToString();
+    return strAddress;
+}
+
 // Handlers for core signals
 static void NotifyKeyStoreStatusChanged(WalletModel *walletmodel, CCryptoKeyStore *wallet)
 {

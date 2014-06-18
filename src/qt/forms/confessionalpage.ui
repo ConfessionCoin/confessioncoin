@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfessionalPage</class>
+ <widget class="QWidget" name="ConfessionalPage">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>798</width>
+    <height>655</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>ConfessionCoin</string>
+  </property>
+  <property name="toolTip">
+   <string>The Confessional</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 10pt &quot;Ubuntu&quot;;
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="updateConfessions">
+         <property name="text">
+          <string>Update Confessions</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="generateTipAddress">
+         <property name="text">
+          <string>Generate Tip Address</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="capturePenance">
+         <property name="text">
+          <string>Capture Penance Information</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+       <widget class="QWebView" name="confessionalView" native="true">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="url" stdset="0">
+         <url>
+           <string>http://confessioncoin.com</string>
+         </url>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>updateConfessions</sender>
+   <signal>clicked()</signal>
+   <receiver>ConfessionalPage</receiver>
+   <slot>updateConfessions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>53</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>capturePenance</sender>
+   <signal>clicked()</signal>
+   <receiver>ConfessionalPage</receiver>
+   <slot>capturePenance()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>775</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>794</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>generateTipAddress</sender>
+   <signal>clicked()</signal>
+   <receiver>ConfessionalPage</receiver>
+   <slot>generateTipAddress()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>487</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>793</x>
+     <y>22</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateConfessions()</slot>
+  <slot>generateTipAddress()</slot>
+  <slot>capturePenance()</slot>
+ </slots>
+</ui>
