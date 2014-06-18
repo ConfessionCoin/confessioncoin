@@ -70,10 +70,17 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="captureTipAddress">
+         <property name="text">
+          <string>Capture Tip Address</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
-       <widget class="QWebView" name="confessionalView" native="true">
+      <widget class="QWebView" name="confessionalView" native="true">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -90,9 +97,9 @@
         </size>
        </property>
        <property name="url" stdset="0">
-         <url>
-           <string>http://confessioncoin.com</string>
-         </url>
+        <url>
+         <string>http://confessioncoin.com</string>
+        </url>
        </property>
       </widget>
      </item>
@@ -100,6 +107,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>qwebview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -125,8 +139,8 @@
    <slot>capturePenance()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>775</x>
-     <y>21</y>
+     <x>591</x>
+     <y>32</y>
     </hint>
     <hint type="destinationlabel">
      <x>794</x>
@@ -141,12 +155,28 @@
    <slot>generateTipAddress()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>487</x>
-     <y>22</y>
+     <x>395</x>
+     <y>33</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
      <y>22</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>captureTipAddress</sender>
+   <signal>clicked()</signal>
+   <receiver>ConfessionalPage</receiver>
+   <slot>captureTipAddress()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>670</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>794</x>
+     <y>94</y>
     </hint>
    </hints>
   </connection>
@@ -155,5 +185,6 @@
   <slot>updateConfessions()</slot>
   <slot>generateTipAddress()</slot>
   <slot>capturePenance()</slot>
+  <slot>captureTipAddress()</slot>
  </slots>
 </ui>

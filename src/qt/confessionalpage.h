@@ -28,6 +28,7 @@ private slots:
     void updateConfessions();
     void generateTipAddress();
     void capturePenance();
+    void captureTipAddress();
 };
 
 #endif // CONFESSIONALPAGE_H

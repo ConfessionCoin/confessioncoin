@@ -15,6 +15,7 @@
 #include <QAbstractItemDelegate>
 #include <QPainter>
 #include <QtWebKit>
+#include <QInputDialog>
 
 #include "confessionalpage.moc"
 
@@ -98,10 +99,51 @@ void ConfessionalPage::capturePenance()
             }
         }
 
-        QWebElement okButton = document.findFirst("span[class=ui-button-text]");
+        QWebElement okButton = document.findFirst("button[class=ui-button]");
         okButton.evaluateJavaScript("this.click()");
-        okButton = document.findFirst("button[class=ui-button]");
+
+        okButton = document.findFirst("span[class=ui-button-text]");
         okButton.evaluateJavaScript("this.click()");
     }
 }
 
+void ConfessionalPage::captureTipAddress()
+{
+    QWebPage *page = ui->confessionalView->page();
+    QWebFrame *frame = page->mainFrame();
+    QWebElement document = frame->documentElement();
+    QWebElement tip_address_elem = frame->findFirstElement("#current-tip-address");
+
+    QString tip_address = tip_address_elem.toPlainText();
+
+    if (tip_address.isEmpty() || (tip_address.length() == 0))
+    {
+        QMessageBox::information(NULL, "Tip Address Capture Error", "Please click on the \"tip\" link by the confession to where you'd like to send some coins before clicking this.");
+    }
+    else
+    {
+        bool ok = false;
+        double tip_amount = QInputDialog::getDouble(this, "Enter Tip Amount", "How many ConfessionCoins would you like to send to " + tip_address, 5, -10000, 10000, 2, &ok);
+        if (ok)
+        {
+            SendCoinsRecipient confession;
+            confession.address = tip_address;
+            confession.label = "Confession Tip";
+            confession.amount = (tip_amount * 100000000);
+
+            QList<SendCoinsRecipient> l;
+            l.append(confession);
+
+            WalletModel::UnlockContext ctx(walletModel->requestUnlock());
+            if(ctx.isValid())
+            {
+                walletModel->sendCoins(l, NULL);
+            }
+        }
+    }
+    QWebElement okButton = document.findFirst("button[class=ui-button]");
+    okButton.evaluateJavaScript("this.click()");
+
+    okButton = document.findFirst("span[class=ui-button-text]");
+    okButton.evaluateJavaScript("this.click()");
+}
