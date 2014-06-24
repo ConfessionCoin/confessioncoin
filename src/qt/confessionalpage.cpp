@@ -1,5 +1,8 @@
 #include "confessionalpage.h"
+
+#ifndef _WINDOWS
 #include "ui_confessionalpage.h"
+#endif
 
 #include "clientmodel.h"
 #include "walletmodel.h"
@@ -14,21 +17,28 @@
 
 #include <QAbstractItemDelegate>
 #include <QPainter>
+
+#ifndef _WINDOWS
 #include <QtWebKit>
 #include <QInputDialog>
-
-#include "confessionalpage.moc"
+#endif
 
 ConfessionalPage::ConfessionalPage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ConfessionalPage)
+    QWidget(parent)
+#ifndef _WINDOWS
+    ,ui(new Ui::ConfessionalPage)
+#endif
 {
+#ifndef _WINDOWS
     ui->setupUi(this);
+#endif
 }
 
 ConfessionalPage::~ConfessionalPage()
 {
+#ifndef _WINDOWS
     delete ui;
+#endif
 }
 
 void ConfessionalPage::setWalletModel(WalletModel *model)
@@ -36,6 +46,7 @@ void ConfessionalPage::setWalletModel(WalletModel *model)
     this->walletModel = model;
 }
 
+#ifndef _WINDOWS
 void ConfessionalPage::updateConfessions()
 {
     ui->confessionalView->load(QUrl("http://confessioncoin.com"));
@@ -147,3 +158,4 @@ void ConfessionalPage::captureTipAddress()
     okButton = document.findFirst("span[class=ui-button-text]");
     okButton.evaluateJavaScript("this.click()");
 }
+#endif

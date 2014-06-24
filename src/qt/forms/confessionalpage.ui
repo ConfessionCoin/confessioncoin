@@ -51,6 +51,9 @@
        </property>
        <item>
         <widget class="QPushButton" name="updateConfessions">
+         <property name="toolTip">
+          <string>Reload confessioncoin.com</string>
+         </property>
          <property name="text">
           <string>Update Confessions</string>
          </property>
@@ -58,6 +61,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="generateTipAddress">
+         <property name="toolTip">
+          <string>Generate a new Tip Address and insert it into the confession form</string>
+         </property>
          <property name="text">
           <string>Generate Tip Address</string>
          </property>
@@ -65,6 +71,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="capturePenance">
+         <property name="toolTip">
+          <string>Please post a confession first, and while the dialog is displaying the penance amount and address, try clicking this button again to facilitate the transaction.</string>
+         </property>
          <property name="text">
           <string>Capture Penance Information</string>
          </property>
@@ -72,6 +81,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="captureTipAddress">
+         <property name="toolTip">
+          <string>Please click on the &quot;tip&quot; link by the confession to where you'd like to send some coins before clicking this.</string>
+         </property>
          <property name="text">
           <string>Capture Tip Address</string>
          </property>

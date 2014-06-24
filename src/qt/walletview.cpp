@@ -29,6 +29,9 @@
 #endif
 #include <QFileDialog>
 #include <QPushButton>
+#ifdef _WINDOWS
+#include <QMessageBox>
+#endif
 
 WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
     QStackedWidget(parent),
@@ -64,7 +67,9 @@ WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
     signVerifyMessageDialog = new SignVerifyMessageDialog(gui);
 
     addWidget(overviewPage);
+#ifndef _WINDOWS
     addWidget(confessionalPage);
+#endif
     addWidget(transactionsPage);
     addWidget(addressBookPage);
     addWidget(receiveCoinsPage);
@@ -120,7 +125,9 @@ void WalletView::setWalletModel(WalletModel *walletModel)
         // Put transaction list in tabs
         transactionView->setModel(walletModel);
         overviewPage->setWalletModel(walletModel);
+#ifndef _WINDOWS
         confessionalPage->setWalletModel(walletModel);
+#endif
         addressBookPage->setModel(walletModel->getAddressTableModel());
         receiveCoinsPage->setModel(walletModel->getAddressTableModel());
         sendCoinsPage->setModel(walletModel);
@@ -162,8 +169,12 @@ void WalletView::gotoOverviewPage()
 
 void WalletView::gotoConfessionalPage()
 {
+#ifndef _WINDOWS
     gui->getConfessionalAction()->setChecked(true);
     setCurrentWidget(confessionalPage);
+#else
+    QMessageBox::information(NULL, "Confessional Error", "We're sorry, but the Confessional feature is not available on Windows at this time, but is supported in the OS X and GNU/Linux wallets.  Please contact the development team for more information (dev@confessioncoin.com)");
+#endif
 }
 
 void WalletView::gotoHistoryPage()

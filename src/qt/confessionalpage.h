@@ -2,11 +2,18 @@
 #define CONFESSIONALPAGE_H
 
 #include <QWidget>
-#include <QWebView>
 
+#ifndef _WINDOWS
+#include <QWebView>
+#else
+class QWebView { };
+#endif
+
+#ifndef _WINDOWS
 namespace Ui {
     class ConfessionalPage;
 }
+#endif
 class WalletModel;
 
 /** Confessional page widget */
@@ -21,14 +28,18 @@ public:
     void setWalletModel(WalletModel *walletModel);
 
 private:
+#ifndef _WINDOWS
     Ui::ConfessionalPage *ui;
+#endif
     WalletModel *walletModel;
 
 private slots:
+#ifndef _WINDOWS
     void updateConfessions();
     void generateTipAddress();
     void capturePenance();
     void captureTipAddress();
+#endif
 };
 
 #endif // CONFESSIONALPAGE_H

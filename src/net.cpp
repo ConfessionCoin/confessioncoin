@@ -1153,14 +1153,12 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
-    {"seed.confessioncoin.org", "dnsseed.confessioncoin.org"},
-    /* {"pool.confessioncoin.org", "pool.confessioncoin.org"}, */
-    /* {"sempai.confessioncoin.org", "sempai.confessioncoin.org"}, */
+    {"dnsseed.confessioncoin.com", "dnsseed.confessioncoin.com"},
+    {"dnsseed2.confessioncoin.com", "dnsseed2.confessioncoin.com"},
     {NULL, NULL}
 };
 
 static const char *strTestNetDNSSeed[][2] = {
-    /* {"confessioncoin.org", "testnet-seed.confessioncoin.org"}, */
     {NULL, NULL}
 };
 
@@ -1326,7 +1324,7 @@ void ThreadOpenConnections()
     }
 
     // Initiate network connections
-    //int64 nStart = GetTime();
+    int64 nStart = GetTime();
     loop
     {
         ProcessOneShot();
@@ -1336,26 +1334,26 @@ void ThreadOpenConnections()
         CSemaphoreGrant grant(*semOutbound);
         boost::this_thread::interruption_point();
 
-        // Add seed nodes if IRC isn't working
-        /* if (addrman.size()==0 && (GetTime() - nStart > 60) && !fTestNet) */
-        /* { */
-        /*     std::vector<CAddress> vAdd; */
-        /*     for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++) */
-        /*     { */
-        /*         // It'll only connect to one or two seed nodes because once it connects, */
-        /*         // it'll get a pile of addresses with newer timestamps. */
-        /*         // Seed nodes are given a random 'last seen time' of between one and two */
-        /*         // weeks ago. */
-        /*         const int64 nOneWeek = 7*24*60*60; */
-        /*         struct in_addr ip; */
-        /*         memcpy(&ip, &pnSeed[i], sizeof(ip)); */
-        /*         CAddress addr(CService(ip, GetDefaultPort())); */
-        /*         addr.nTime = GetTime()-GetRand(nOneWeek)-nOneWeek; */
+        //Add seed nodes if IRC isn't working
+        if (addrman.size()==0 && (GetTime() - nStart > 60) && !fTestNet)
+        {
+            std::vector<CAddress> vAdd;
+            for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
+            {
+                // It'll only connect to one or two seed nodes because once it connects,
+                // it'll get a pile of addresses with newer timestamps.
+                // Seed nodes are given a random 'last seen time' of between one and two
+                // weeks ago.
+                const int64 nOneWeek = 7*24*60*60;
+                struct in_addr ip;
+                memcpy(&ip, &pnSeed[i], sizeof(ip));
+                CAddress addr(CService(ip, GetDefaultPort()));
+                addr.nTime = GetTime()-GetRand(nOneWeek)-nOneWeek;
 
-        /*         vAdd.push_back(addr); */
-        /*     } */
-        /*     addrman.Add(vAdd, CNetAddr("127.0.0.1")); */
-        /* } */
+                vAdd.push_back(addr);
+            }
+            addrman.Add(vAdd, CNetAddr("127.0.0.1"));
+        }
 
         //
         // Choose an address to connect to based on most recently seen
