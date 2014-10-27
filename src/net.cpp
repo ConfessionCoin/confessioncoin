@@ -374,18 +374,18 @@ bool GetMyExternalIP(CNetAddr& ipRet)
         }
         else if (nHost == 2)
         {
-            //addrConnect = CService("70.40.200.81", 80); // www.confessioncoin.org
-            addrConnect = CService("confessioncoin.org", 80); // www.confessioncoin.org
+            //addrConnect = CService("70.40.200.81", 80); // www.confessioncoin.com
+            addrConnect = CService("confessioncoin.com", 80); // www.confessioncoin.com
 
             if (nLookup == 1)
             {
-                CService addrIP("confessioncoin.org", 80, true);
+                CService addrIP("confessioncoin.com", 80, true);
                 if (addrIP.IsValid())
                     addrConnect = addrIP;
             }
 
             pszGet = "GET / HTTP/1.1\r\n"
-                     "Host: confessioncoin.org\r\n"
+                     "Host: confessioncoin.com\r\n"
                      "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
                      "Connection: close\r\n"
                      "\r\n";
@@ -1155,6 +1155,7 @@ void MapPort(bool)
 static const char *strMainNetDNSSeed[][2] = {
     {"dnsseed.confessioncoin.com", "dnsseed.confessioncoin.com"},
     {"dnsseed2.confessioncoin.com", "dnsseed2.confessioncoin.com"},
+    {"dnsseed3.confessioncoin.com", "dnsseed3.confessioncoin.com"},
     {NULL, NULL}
 };
 
@@ -1806,7 +1807,7 @@ void StartNode(boost::thread_group& threadGroup)
     // Start threads
     //
 
-    if (!GetBoolArg("-dnsseed", true))
+    if (GetBoolArg("-dnsseed", false))
         printf("DNS seeding disabled\n");
     else
         threadGroup.create_thread(boost::bind(&TraceThread<boost::function<void()> >, "dnsseed", &ThreadDNSAddressSeed));
