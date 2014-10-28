@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = confessioncoin-qt
 macx:TARGET = "Confessioncoin-Qt"
-VERSION = 8.7.1
+VERSION = 8.7.3
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
 !win32 {
