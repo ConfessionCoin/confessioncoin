@@ -275,8 +275,8 @@ Value sendtoaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoaddress <Confessioncoinaddress> <amount> <confession>\n"
-            "<amount> is a real and is rounded to the nearest 0.00000001"
+            "sendtoaddress <Confessioncoinaddress> <amount> <confession> "
+            "NOTE: <amount> is a real and is rounded to the nearest 0.00000001 "
             + HelpRequiringPassphrase());
 
     CBitcoinAddress address(params[0].get_str());
@@ -633,8 +633,8 @@ Value sendfrom(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
-            "sendfrom <fromaccount> <toConfessioncoinaddress> <amount> <confession> [minconf=1]\n"
-            "<amount> is a real and is rounded to the nearest 0.00000001"
+            "sendfrom <fromaccount> <toConfessioncoinaddress> <amount> <confession> [minconf=1] "
+            "NOTE: <amount> is a real and is rounded to the nearest 0.00000001 "
             + HelpRequiringPassphrase());
 
     string strAccount = AccountFromValue(params[0]);
@@ -677,8 +677,8 @@ Value sendmany(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendmany <fromaccount> {address:amount,...} <confession> [minconf=1]\n"
-            "amounts are double-precision floating point numbers"
+            "sendmany <fromaccount> {address:amount,...} <confession> [minconf=1] "
+            "NOTE: amounts are double-precision floating point numbers "
             + HelpRequiringPassphrase());
 
     string strAccount = AccountFromValue(params[0]);
